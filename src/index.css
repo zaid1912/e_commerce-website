@@ -1,13 +1,57 @@
-body {
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  /* Add other global styles here */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Apply styles to the body element */
+body {
+  background-color: var(--background-color);
+  /* color: var(--primary-color); */
+  /* Add other body-specific styles here */
+}
+
+/* Apply styles to links */
+a {
+  color: #000000;
+  text-decoration: none;
+  /* Add other link styles here */
+}
+
+/* Apply styles to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  /* Add other heading styles here */
+}
+
+/* Add other global styles for specific elements as needed */
+
+:root {
+  /* Colors */
+  --primary-color: #8abdff;      /* Main brand color */
+  --secondary-color: #6c757d;    /* Secondary color for buttons, etc. */
+  --background-color: #f0f0f0;   /* Background color of the website */
+  --text-color: #333333;         /* Default text color */
+  --link-color: var(--primary-color);   /* Color for links */
+  --link-color-hover: #0056b3;   /* Color for links on hover */
+
+  /* Font */
+  --heading-font-family: 'Roboto', sans-serif; /* Font family for headings */
+  --base-font-size: 16px;        /* Default base font size */
+
+  /* Spacing */
+  --spacing-xs: 4px;             /* Extra small spacing (4px) */
+  --spacing-sm: 8px;             /* Small spacing (8px) */
+  --spacing-md: 16px;            /* Medium spacing (16px) */
+  --spacing-lg: 24px;            /* Large spacing (24px) */
+  --spacing-xl: 32px;            /* Extra large spacing (32px) */
+
+  /* Border */
+  --border-radius: 4px;          /* Border radius for elements */
+
+  /* Box Shadows */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default box shadow */
 }

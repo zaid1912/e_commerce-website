@@ -1,0 +1,33 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+    /* background-color: aliceblue; */
+    padding: 1rem 0;
+    align-items: center;
+    background: transparent;
+    height: 4rem;
+}
+.heading, .heading span{
+    font-family: var(--heading-font-family);
+    letter-spacing: 2px;
+}
+.heading{
+    font-weight: 900;
+    font-size: 1.3rem;
+}
+
+.heading span{
+    font-weight: 200;
+}
+.nav-list{
+    /* font-size: 1.3rem; */
+    display: flex;
+    justify-content: space-between;
+    /* background-color: antiquewhite; */
+    width: 40%;
+}
+.right-nav{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
