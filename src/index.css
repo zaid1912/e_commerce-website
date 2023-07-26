@@ -31,9 +31,9 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
   /* Colors */
-  --primary-color: #8abdff;      /* Main brand color */
+  --primary-color: #67a9ff;      /* Main brand color */
   --secondary-color: #6c757d;    /* Secondary color for buttons, etc. */
-  --background-color: #f0f0f0;   /* Background color of the website */
+  --background-color: #ffffff;   /* Background color of the website */
   --text-color: #333333;         /* Default text color */
   --link-color: var(--primary-color);   /* Color for links */
   --link-color-hover: #0056b3;   /* Color for links on hover */

@@ -1,0 +1,103 @@
+/* .card{
+    width: 3rem;
+}
+
+.card img{
+    max-width: 25rem;
+} */
+
+
+
+
+/* card.css */
+
+.card {
+    position: relative;
+    max-width: 25rem;
+    transition: filter 400ms ease;
+    border: 1px solid rgb(219, 219, 219);
+  }
+  
+  .card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .card-content {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  .card-heading {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  /* .card-link {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: background-color 0.3s ease;
+  } */
+
+  /* .card-link{
+    color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    visibility: hidden;
+    transition: all 400ms ease;
+  }
+  .card:hover{
+    .card-link{
+        visibility: visible;
+    }
+    filter: invert(41%) sepia(28%) saturate(6163%) hue-rotate(168deg) brightness(105%) contrast(101%);
+  }
+  
+  .card-link:hover {
+    background-color: #0056b3;
+  } */
+  
+
+
+  .card-link {
+    color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    visibility: hidden;
+    opacity: 0; /* Set opacity to 0 to hide the link */
+    transition: opacity 400ms ease; /* Add transition for opacity */
+  }
+  
+  .card:hover {
+    filter: hue-rotate(215deg);
+  }
+  
+  .card:hover .card-link {
+    visibility: visible;
+    opacity: 1; /* Set opacity to 1 to make the link visible */
+  }

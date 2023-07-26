@@ -1,38 +1,29 @@
-/* SimpleSlider.css */
-
-/* Style for the entire Slider component */
 .slider-container {
-    position: relative;
-    overflow: hidden;
-    /* width: 100%; */
-    /* height: 8rem; */
-    /* overflow-x: hidden; */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
 
-  }
-  
-  /* Style for each slide */
-  .slider-slide {
-    position: relative;
-    height: calc(100vh - 4rem);
-    overflow: hidden;
-  }
-  
-  /* Style for the image in each slide */
-  .slider-slide img {
-    width: 100%;
-    position: relative;
-    /* height: 100vh; */
-    /* height: calc(100vh - 4rem); */
-    overflow: hidden;
-    /* height: 80%; */
+/* Style for each slide */
+.slider-slide {
+  position: relative;
+  height: calc(100vh - 4rem);
+  overflow: hidden;
+  width: 100%;
+}
 
-    /* height: auto; */
-  }
+/* Style for the image in each slide */
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   
   /* Style for the text and button overlay */
   .slider-content {
     position: absolute;
-    bottom: 50%;
+    /* bottom: 50%; */
+    top: 40%;
     left: 20%;
     transform: translateX(-50%);
     /* background-color: rgba(255, 255, 255, 0.8); */
@@ -54,7 +45,8 @@
   .slider-content button {
     padding: 10px 20px;
     background-color: var(--primary-color);
-    transition: 500 ease;
+    transition: 300ms ease;
+    font-size: 1rem;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -65,7 +57,39 @@
   }
   
 
-  @media screen and (max-width:1024px){
+  @media screen and (max-width: 1024px) {
+    .slider-slide {
+      height: calc(100vh - 3rem); /* Decrease the height for smaller screens */
+    }
+  
+    .slider-content {
+      top: 25%;
+      left: 30%; /* Adjust the vertical positioning for smaller screens */
+    }
+  
+    .slider-content h3 {
+      font-size: 3rem; /* Decrease font size for smaller screens */
+    }
+  
+    .slider-content p {
+      font-size: 1.3rem; /* Decrease font size for smaller screens */
+    }
+  }
 
-    
+  @media screen and (max-width: 600px) {
+    .slider-slide {
+      height: calc(100vh - 4rem); /* Decrease the height for even smaller screens */
+    }
+  
+    .slider-content {
+      top: 25%; /* Further adjust the vertical positioning for smaller screens */
+    }
+  
+    .slider-content h3 {
+      font-size: 2rem; /* Decrease font size for even smaller screens */
+    }
+  
+    .slider-content p {
+      font-size: 1rem; /* Decrease font size for even smaller screens */
+    }
   }

@@ -9,8 +9,13 @@ class SimpleSlider extends Component {
     //   dots: true,
       infinite: true,
       speed: 500,
+      autoplaySpeed:2500,
       slidesToShow: 1,
+      autoplay:true,
       slidesToScroll: 1,
+      fade:true,
+      cssEase:"linear",
+      pauseOnHover: false,
     };
     return (
       <div className='slider-container'>
