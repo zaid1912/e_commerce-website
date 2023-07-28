@@ -5,17 +5,23 @@ import IconButton from "@mui/material/IconButton";
 import './navbar.css';
 
 function Navbar() {
+  const handleScrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
   return (
+
     <div className="nav">
       <div className="heading">
         TRENDY <span>THREADS</span>
       </div>
       <div className="nav-list">
-        <a href="http://">Home</a>
-        <a href="">Shop</a>
-        <a href="">Blog</a>
-        <a href="">About</a>
-        <a href="">Contact</a>
+        <a onClick={() => handleScrollToSection("home")} href="">Home</a>
+        <a onClick={() => handleScrollToSection("categories")} href="#categories">Shop</a>
+        <a onClick={() => handleScrollToSection("about")} href="">About</a>
+        <a onClick={() => handleScrollToSection("contact")} href="">Contact</a>
       </div>
       <div className="right-nav">
         <IconButton>

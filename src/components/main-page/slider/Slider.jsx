@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import './slider.css';
 // import './SimpleSlider.css'; // Import your custom CSS styles for the Slider component
 
+
 class SimpleSlider extends Component {
   render() {
     const settings = {
@@ -32,8 +33,7 @@ class SimpleSlider extends Component {
 
           {/* Slide 2 */}
           <div className="slider-slide">
-          <img src="https://img.freepik.com/free-photo/young-handsome-man-street-outfit_1303-19664.jpg" alt="img2" />
-            {/* <img src="https://media.istockphoto.com/id/660307016/photo/dude-in-check.jpg?s=612x612&w=0&k=20&c=ojAEpockZCPuKrLXwLtGurOaghGDfmZsVduO-lCnOEE=" alt="Image 2" /> */}
+          <img src="https://img.freepik.com/free-photo/young-hipster-guy-wearing-glasses-laughing-happily-isolated-white_146671-15549.jpg?w=1380&t=st=1690555359~exp=1690555959~hmac=0ba42db65fb69aacbc603b908413042a3401382129bcce8ef7861e54c192a760" alt="" />
             <div className="slider-content">
             <p>Men Collection 2023</p>
             <h3>New Arrivals</h3>
@@ -43,7 +43,7 @@ class SimpleSlider extends Component {
 
           {/* Slide 3 */}
           <div className="slider-slide">
-            <img src="https://img.freepik.com/free-photo/cute-stylish-children_155003-8330.jpg?w=1380&t=st=1690101537~exp=1690102137~hmac=c115befd4fa6fd8f22aad70d10b96ce008dda2f1e548293755c51a95e161ff21" alt="Image 3" />
+          <img src="https://img.freepik.com/free-photo/little-girl-posing-school-s-uniform-white-studio-wall_155003-38311.jpg?w=1380&t=st=1690556417~exp=1690557017~hmac=f417aa17e593f43f29c6fc76c680f2948c7720ae798ed052c4a4df8821d6edbe" alt="" />
             <div className="slider-content">
             <p>Kids Collection 2023</p>
             <h3>New Arrivals</h3>

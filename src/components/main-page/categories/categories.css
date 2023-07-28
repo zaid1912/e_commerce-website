@@ -1,0 +1,32 @@
+.all-cards{
+    display: flex;
+    justify-content: space-between;
+    /* margin: 4rem 8rem; */
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: aliceblue; */
+
+}
+.centered{
+    margin-left: 12rem;
+    margin-right: 12rem;
+}
+
+@media screen and (max-width: 600px) {
+    .all-cards{
+        flex-direction: column;
+        
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .centered{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .all-cards{
+        column-gap: 2rem;
+    }
+  }

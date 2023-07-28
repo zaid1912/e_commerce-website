@@ -4,12 +4,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
   /* Add other global styles here */
 }
 
 /* Apply styles to the body element */
 body {
   background-color: var(--background-color);
+  scroll-behavior: smooth;
   /* color: var(--primary-color); */
   /* Add other body-specific styles here */
 }
@@ -26,7 +28,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   /* Add other heading styles here */
 }
-
+h1{
+  font-size: 2.5rem;
+}
+h2{
+  font-size: 1.8rem;
+}
+p{
+  font-size: 1rem;
+}
 /* Add other global styles for specific elements as needed */
 
 :root {
@@ -54,4 +64,9 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Box Shadows */
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default box shadow */
+}
+
+@media screen and(max-width:600px) {
+  
+  
 }
