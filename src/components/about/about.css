@@ -1,0 +1,112 @@
+.about-header{
+    background-image: url('https://img.freepik.com/free-photo/modern-pretty-girl-beige-coat-standing-near-building-outdoor-glamorous-sunglasses-her-face-makeup-stylish-tail-hairstyle-hand-near-face-lot-summer-light-last-warm-days_343629-69.jpg?w=1800&t=st=1690722651~exp=1690723251~hmac=2eaf8644d4a5610afc2e106dc7ac7da6366069a9086748891f9bf66e703f80a0');
+    background-repeat: no-repeat;
+    /* width: 100vw; */
+    height: 20rem;
+    background-size: cover;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-header h1{
+    font-size: 5rem;
+    color: white;
+}
+
+.about-container{
+    margin: 6rem 18rem;
+}
+.our-story, .our-mission{
+    display: flex;
+    margin: 8rem 0;
+    /* justify-content: space-between; */
+}
+
+.pic img{
+    max-width: 400px;
+    max-height: 400px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.info1{
+    margin-right: 4rem;
+}
+
+.info2{
+    margin-left: 4rem;
+}
+
+.about-section h2{
+    margin-bottom: 2rem;
+}
+
+.about-section p{
+    color: rgb(131, 131, 131);
+    line-height: 1.4;
+}
+
+@media screen and (max-width:1024px) {
+    .about-container{
+        margin: 4rem 6rem;
+    }
+    .our-mission, .our-story{
+        flex-direction: column;
+        margin: 2rem 0;
+    }
+    .info1{
+        margin-right: 0;
+    }
+    
+    .info2{
+        margin-left: 0;
+    }
+    .pic img{
+        width: 300px;
+    }
+    .our-mission .pic{
+        margin-left: 19rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .about-header{
+        height: 13rem;
+    }
+    .about-header h1{
+        font-size: 4rem;
+    }
+    .about-container{
+        margin: 2rem 2rem;
+    }
+    .our-mission, .our-story{
+        flex-direction: column;
+        margin: 2rem 0;
+    }
+    .our-story p{
+        margin-bottom: 2rem;
+    }
+    .our-mission h2{
+        margin-top: 2rem;
+    }
+    .info1{
+        margin-right: 0;
+    }
+    
+    .info2{
+        margin-left: 0;
+    }
+    .pic img{
+        width: 300px;
+    }
+    .our-mission .pic{
+        margin-left: auto;
+        margin-right: auto
+        
+    }
+    .our-story .pic{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

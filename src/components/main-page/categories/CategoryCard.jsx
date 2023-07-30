@@ -1,9 +1,10 @@
 import React from "react";
-import categories from "./catagoryDictionary";
+import { useNavigate } from "react-router-dom";
 import './card.css';
-
+import {NavLink} from 'react-router-dom';
 
 function CategoryCard(props) {
+  const navigate = useNavigate();
   return (
     <div className="card">
       <img src={props.imgUrl} alt="image" className="card-img" />
@@ -11,9 +12,10 @@ function CategoryCard(props) {
         <h3 className="card-heading">{props.heading}</h3>
         <p className="card-description">{props.desc}</p>
       </div>
-      <a href={props.gotoUrl} className="card-link">
+      {/* <NavLink to={props.gotoUrl} className="card-link">
         Shop Now
-      </a>
+      </NavLink> */}
+      <a className="card-link" onClick={() => navigate(props.gotoUrl)}>Shop Now</a>
     </div>
   );
 }

@@ -6,13 +6,13 @@ import featuredDictionary from "./featuredDictionary";
 function Featured() {
   return (
     <div className="horizCentre">
-      
       <div className="products-header">
         <h1>Products Overview</h1>
         <h2>Featured Items</h2>
         <div className="all-featured-cards">
           {featuredDictionary.map((item) => (
             <ProductsCard
+              key={item.id}
               imgUrl={item.imgUrl}
               name={item.name}
               price={item.price}
@@ -21,7 +21,6 @@ function Featured() {
         </div>
       </div>
     </div>
-   
   );
 }
 

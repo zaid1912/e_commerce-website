@@ -3,6 +3,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import './navbar.css';
+import { NavLink } from "react-router-dom";
+import About from '../about/About';
 
 function Navbar() {
   const handleScrollToSection = (sectionId) => {
@@ -18,10 +20,14 @@ function Navbar() {
         TRENDY <span>THREADS</span>
       </div>
       <div className="nav-list">
-        <a onClick={() => handleScrollToSection("home")} href="">Home</a>
-        <a onClick={() => handleScrollToSection("categories")} href="#categories">Shop</a>
-        <a onClick={() => handleScrollToSection("about")} href="">About</a>
-        <a onClick={() => handleScrollToSection("contact")} href="">Contact</a>
+      <NavLink to='/'>Home</NavLink>
+      <NavLink to='/'>Shop</NavLink>
+        {/* <a onClick={() => handleScrollToSection("home")} href="">Home</a>
+        <a onClick={() => handleScrollToSection("categories")} href="#categories">Shop</a> */}
+        {/* <a onClick={() => handleScrollToSection("about")}>About</a> */}
+        <NavLink to='about'>About</NavLink>
+        {/* <a onClick={() => handleScrollToSection("contact")} href="">Contact</a> */}
+        <NavLink to='contact'>Contact</NavLink>
       </div>
       <div className="right-nav">
         <IconButton>
