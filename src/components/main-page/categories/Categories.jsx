@@ -6,11 +6,13 @@ import "./categories.css";
 function Categories() {
   return (
     <div id="categories" className="centered">
-      <h3 className="shop-heading">Shop Now</h3>
+      <div className="center-text">
+        <h2 className="shop-heading">Shop Now</h2>
+      </div>
       <div className="all-cards">
         {categories.map((catagory) => (
           <CategoryCard
-            key = {catagory.id}
+            key={catagory.id}
             imgUrl={catagory.imageUrl}
             heading={catagory.heading}
             desc={catagory.desc}

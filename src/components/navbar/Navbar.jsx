@@ -27,7 +27,7 @@ function Navbar() {
         {/* <a onClick={() => handleScrollToSection("about")}>About</a> */}
         <NavLink to='about'>About</NavLink>
         {/* <a onClick={() => handleScrollToSection("contact")} href="">Contact</a> */}
-        <NavLink to='contact'>Contact</NavLink>
+        <NavLink to='help'>Help</NavLink>
       </div>
       <div className="right-nav">
         <IconButton>

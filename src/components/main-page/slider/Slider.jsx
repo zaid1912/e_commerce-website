@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import './slider.css';
 // import './SimpleSlider.css'; // Import your custom CSS styles for the Slider component
+import { NavLink } from 'react-router-dom';
 
 
 class SimpleSlider extends Component {
@@ -27,7 +28,7 @@ class SimpleSlider extends Component {
             <div className="slider-content">
             <p>Women Collection 2023</p>
             <h3>New Arrivals</h3>
-            <button>Shop Now</button>
+            <button><NavLink to='/women'>Shop Now</NavLink></button>
             </div>
           </div>
 
@@ -37,7 +38,7 @@ class SimpleSlider extends Component {
             <div className="slider-content">
             <p>Men Collection 2023</p>
             <h3>New Arrivals</h3>
-            <button>Shop Now</button>
+            <button><NavLink to='/men'>Shop Now</NavLink></button>
             </div>
           </div>
 
@@ -47,7 +48,7 @@ class SimpleSlider extends Component {
             <div className="slider-content">
             <p>Kids Collection 2023</p>
             <h3>New Arrivals</h3>
-            <button>Shop Now</button>
+            <button><NavLink to='/kids'>Shop Now</NavLink></button>
             </div>
           </div>
         </Slider>

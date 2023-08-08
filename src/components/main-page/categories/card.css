@@ -27,6 +27,7 @@
   .card-heading {
     font-size: 1.2rem;
     margin-bottom: 5px;
+    color: var(--primary-color);
   }
   
   .card-description {

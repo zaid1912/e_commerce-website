@@ -1,0 +1,195 @@
+DROP TABLE IF EXISTS users cascade;
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+	address VARCHAR(400) NOT NULL
+);
+
+DROP TABLE IF EXISTS categories cascade;
+CREATE TABLE categories (
+  category_id SERIAL PRIMARY KEY,
+  category_name VARCHAR(100) NOT NULL
+);
+
+DROP TABLE IF EXISTS sub_category cascade;
+CREATE TABLE sub_category (
+  sub_category_id SERIAL PRIMARY KEY,
+  sub_category_name VARCHAR(100) NOT NULL
+);
+
+
+DROP TABLE IF EXISTS products cascade;
+CREATE TABLE products (
+  product_id SERIAL PRIMARY KEY,
+  product_name VARCHAR(200) NOT NULL,
+	product_description VARCHAR(600),
+  category_id INTEGER REFERENCES categories(category_id),
+	sub_category_id INTEGER REFERENCES sub_category(sub_category_id),
+  price NUMERIC NOT NULL,
+  image_url VARCHAR(500)
+);
+
+
+DROP TABLE IF EXISTS sizes cascade;
+CREATE TABLE sizes (
+  size_id SERIAL PRIMARY KEY,
+  size_name VARCHAR(10) NOT NULL
+);
+
+
+DROP TABLE IF EXISTS product_sizes cascade;
+CREATE TABLE product_sizes (
+  product_size_id SERIAL PRIMARY KEY,
+  product_id INTEGER REFERENCES products(product_id),
+  size_id INTEGER REFERENCES sizes(size_id),
+  quantity_available INTEGER -- You may change the data type as needed
+);
+
+
+DROP TABLE IF EXISTS shoe_sizes cascade;
+CREATE TABLE shoe_sizes (
+  shoe_size_id SERIAL PRIMARY KEY,
+  shoe_size INTEGER NOT NULL CHECK (shoe_size >= 38 AND shoe_size <= 47)
+);
+
+
+
+DROP TABLE IF EXISTS product_shoe_sizes cascade;
+CREATE TABLE product_shoe_sizes (
+  product_shoe_size_id SERIAL PRIMARY KEY,
+  product_id INTEGER REFERENCES products(product_id),
+  shoe_size_id INTEGER REFERENCES shoe_sizes(shoe_size_id),
+  quantity_available INTEGER -- You may change the data type as needed
+);
+
+
+DROP TABLE IF EXISTS favourites;
+CREATE TABLE favourites (
+  favourite_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(user_id),
+  product_id INTEGER REFERENCES products(product_id)
+);
+
+
+
+DROP TABLE IF EXISTS cart_items;
+CREATE TABLE cart_items (
+  cart_item_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(user_id),
+  product_id INTEGER REFERENCES products(product_id),
+  quantity INTEGER NOT NULL
+);
+
+
+
+
+
+-- select * from users
+
+-- Insert data into the users table
+INSERT INTO users (username, email, password, address)
+VALUES
+  ('john_doe', 'john@example.com', 'hashed_password1', '123 Main St, City A'),
+  ('jane_smith', 'jane@example.com', 'hashed_password2', '456 Oak St, City B'),
+  ('alex_williams', 'alex@example.com', 'hashed_password3', '789 Pine St, City C'),
+  ('emma_davis', 'emma@example.com', 'hashed_password4', '101 Elm St, City D');
+
+-- Insert data into the categories table
+INSERT INTO categories (category_name)
+VALUES
+  ('Men'),
+  ('Women'),
+  ('Kids');
+  
+-- select * from categories
+  
+ -- Insert data into the sub categories table
+INSERT INTO sub_category (sub_category_name)
+VALUES
+  ('tops'),
+  ('bottoms'),
+  ('shoes'),
+  ('watches'),
+  ('jackets');
+
+
+
+-- Insert data into the products table
+INSERT INTO products (product_name, product_description, category_id, sub_category_id, price, image_url)
+VALUES
+  ('Mens T-Shirt', 'Comfortable cotton t-shirt for men', 1, 1, 19.99, 'https://preview.colorlib.com/theme/cozastore/images/product-03.jpg'),
+  ('Mens Jeans', 'Classic denim jeans for men', 1, 2, 39.99, 'https://preview.colorlib.com/theme/cozastore/images/product-03.jpg'),
+  ('Womens Dress', 'Elegant dress for women', 2, 1, 49.99, 'https://preview.colorlib.com/theme/cozastore/images/product-10.jpg'),
+  ('Womens Blouse', 'Stylish blouse for women', 2, 1, 29.99, 'https://preview.colorlib.com/theme/cozastore/images/product-04.jpg'),
+  ('Kids Shoes', 'Colorful shoes for kids', 3, 3, 29.99, 'https://preview.colorlib.com/theme/cozastore/images/product-09.jpg'),
+  ('Kids T-Shirt', 'Fun printed t-shirt for kids', 3, 1, 14.99, 'https://preview.colorlib.com/theme/cozastore/images/product-12.jpg');
+
+-- SELECT sub_category.sub_category_name, products.*
+-- FROM sub_category
+-- INNER JOIN products ON sub_category.sub_category_id = products.sub_category_id;
+
+-- Insert data into the sizes table
+INSERT INTO sizes (size_name)
+VALUES
+  ('S'),
+  ('M'),
+  ('L'),
+  ('XL');
+
+
+-- SELECT * FROM sizes
+
+-- Insert data into the product_sizes table
+INSERT INTO product_sizes (product_id, size_id, quantity_available)
+VALUES
+  (1, 1, 50), -- Men's T-Shirt, Size S, Quantity: 50
+  (1, 2, 30), -- Men's T-Shirt, Size M, Quantity: 30
+  (1, 3, 20), -- Men's T-Shirt, Size L, Quantity: 20
+  (1, 4, 10), -- Men's T-Shirt, Size XL, Quantity: 10
+  (2, 2, 40), -- Men's Jeans, Size M, Quantity: 40
+  (2, 3, 35), -- Men's Jeans, Size L, Quantity: 35
+  (2, 4, 25), -- Men's Jeans, Size XL, Quantity: 25
+  (3, 2, 15), -- Women's Dress, Size M, Quantity: 15
+  (3, 3, 25), -- Women's Dress, Size L, Quantity: 25
+  (4, 1, 20), -- Women's Blouse, Size S, Quantity: 20
+  (4, 2, 30), -- Women's Blouse, Size M, Quantity: 30
+  (4, 3, 25), -- Women's Blouse, Size L, Quantity: 25
+  (6, 1, 50), -- Kids' T-Shirt, Size S, Quantity: 50
+  (6, 2, 45); -- Kids' T-Shirt, Size M, Quantity: 45
+
+-- Insert data into the shoe_sizes table
+INSERT INTO shoe_sizes (shoe_size)
+VALUES
+  (38),
+  (39),
+  (40),
+  (41),
+  (42),
+  (43),
+  (44),
+  (45),
+  (46),
+  (47);
+
+-- Insert data into the product_shoe_sizes table
+INSERT INTO product_shoe_sizes (product_id, shoe_size_id, quantity_available)
+VALUES
+  (5, 38, 20), -- Kids' Shoes, Shoe Size 38, Quantity: 20
+  (5, 39, 25), -- Kids' Shoes, Shoe Size 39, Quantity: 25
+  (5, 40, 30), -- Kids' Shoes, Shoe Size 40, Quantity: 30
+  (5, 41, 15), -- Kids' Shoes, Shoe Size 41, Quantity: 15
+  (5, 42, 20); -- Kids' Shoes, Shoe Size 42, Quantity: 20
+
+
+-- Insert data into the favourites table
+INSERT INTO favourites (user_id, product_id)
+VALUES
+  (1, 1), -- User with ID 1 favorited Men's T-Shirt with ID 1
+  (1, 3), -- User with ID 1 favorited Kids' Shoes with ID 3
+  (2, 2), -- User with ID 2 favorited Men's Jeans with ID 2
+  (3, 3), -- User with ID
+
+
+

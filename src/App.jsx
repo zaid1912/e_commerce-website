@@ -11,21 +11,29 @@ import MainPage from "./components/main-page/MainPage";
 import CategoriesNavbar from "./components/categories-navbar/CategoriesNavbar";
 import WomenTops from "./components/women/WomenTops";
 import Featured from "./components/main-page/products/featured/Featured";
+import HelpLayout from "./components/help-section/HelpLayout";
+import Faqs from "./components/help-section/Faqs";
+import Contact from "./components/help-section/Contact";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<MainPage />} />
+        <Route path="about" element={<About/>} />
+        <Route path="help" element={<HelpLayout/>}>
+          <Route path="faqs" element = {<Faqs />}/>
+          <Route path="contact" element = {<Contact />}/>
+        </Route>
         <Route path="women" element={<WomenPage />}>
           <Route index element={<Featured/>}/>
-          <Route path="bottoms" element={<WomenTops />} />
+          {/* <Route path="bottoms" element={<WomenTops />} /> */}
         </Route>
         <Route path="men" element={<MenPage />}>
-          <Route path="tops" element={<WomenTops />} />
+          {/* <Route path="tops" element={<WomenTops />} /> */}
         </Route>
         <Route path="kids" element={<KidsPage />}>
-          <Route path="tops" element={<WomenTops />} />
+          {/* <Route path="tops" element={<WomenTops />} /> */}
         </Route>
       </Route>
     </>
