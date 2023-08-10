@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import ProductsCard from "../main-page/products/ProductsCard";
 
-function WomenTops() {
-  const [womenTops, setWomenTops] = useState([]);
+function MenTops() {
+  const [menTops, setMenTops] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("women/tops");
-      setWomenTops(response.data);
+      const response = await axios.get("men/tops");
+      setMenTops(response.data);
     }
     fetchData();
   }, []);
 
   return (
     <div>
-      {womenTops.map((product) => (
+      {menTops.map((product) => (
         <ProductsCard
           key={product.product_id}
           imgUrl={product.image_url}
@@ -26,4 +26,4 @@ function WomenTops() {
   );
 }
 
-export default WomenTops;
+export default MenTops;

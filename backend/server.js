@@ -1,8 +1,8 @@
-// import { Express } from "express";
-import mongoose from "mongoose";
+
+import pool from "./db.js";
+import cors from 'cors';
 
 import express from 'express';
-const connection_url = `mongodb+srv://zaidmuzammil1912002:JX8gz0RoCnORLvC3@cluster0.aomemix.mongodb.net/trendythreadsdb?retryWrites=true&w=majority`
 
 //App config
 
@@ -11,27 +11,123 @@ const port = process.env.PORT || 8001;
 
 //Middlewares
 
-
-
-//DB config
-mongoose.connect(connection_url,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
-)
+app.use(cors());
+app.use(express.json());
 
 //API endpoints
 
 
 app.get('/', (req, res) => res.status(200).send('Hello'));
 
-app.get('/women', (req, res) => {
-    res.send("helloasd");
+
+// API Endpoint to Fetch Men's Products
+app.get('/men', async (req, res) => {
+  try {
+    const query = `
+        SELECT * FROM products
+        WHERE category_id IN (
+          SELECT category_id FROM categories WHERE category_name = 'Men'
+        );
+      `;
+
+    const { rows } = await pool.query(query);
+    // console.log(rows);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching men\'s products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/women', async (req, res) => {
+  try {
+    const query = `
+        SELECT * FROM products
+        WHERE category_id IN (
+          SELECT category_id FROM categories WHERE category_name = 'Women'
+        );
+      `;
+
+    const { rows } = await pool.query(query);
+    // console.log(rows);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching men\'s products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/kids', async (req, res) => {
+  try {
+    const query = `
+        SELECT * FROM products
+        WHERE category_id IN (
+          SELECT category_id FROM categories WHERE category_name = 'Kids'
+        );
+      `;
+
+    const { rows } = await pool.query(query);
+    // console.log(rows);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching men\'s products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/men/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = `SELECT products.product_id, products.product_name, products.product_description, products.image_url, products.price
+                    FROM products
+                    INNER JOIN sub_category ON (products.sub_category_id = sub_category.sub_category_id)
+                    INNER JOIN categories ON (categories.category_id = products.category_id)
+                    WHERE sub_category.sub_category_name = $1 AND categories.category_name = 'Men';`;
+    const { rows } = await pool.query(query, [id]);
+    res.json(rows);
+  }
+  catch (error) {
+    console.error('Error fetching men products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
+app.get('/women/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = `SELECT products.product_id, products.product_name, products.product_description, products.image_url, products.price
+                    FROM products
+                    INNER JOIN sub_category ON (products.sub_category_id = sub_category.sub_category_id)
+                    INNER JOIN categories ON (categories.category_id = products.category_id)
+                    WHERE sub_category.sub_category_name = $1 AND categories.category_name = 'Women';`;
+    const { rows } = await pool.query(query, [id]);
+    res.json(rows);
+  }
+  catch (error) {
+    console.error('Error fetching women products:', error);
+    res.status(500).send('Internal Server Error');
+  }
+})
+
+app.get('/kids/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = `SELECT products.product_id, products.product_name, products.product_description, products.image_url, products.price
+                    FROM products
+                    INNER JOIN sub_category ON (products.sub_category_id = sub_category.sub_category_id)
+                    INNER JOIN categories ON (categories.category_id = products.category_id)
+                    WHERE sub_category.sub_category_name = $1 AND categories.category_name = 'Kids';`;
+    const { rows } = await pool.query(query, [id]);
+    res.json(rows);
+  }
+  catch (error) {
+    console.error('Error fetching kids products:', error);
+    res.status(500).send('Internal Server Error');
+  }
 })
 
 app.post('/trendythreads/User', (req, res) => {
-    
+
 })
 
 //Listener
