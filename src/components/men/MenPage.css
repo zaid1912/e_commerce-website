@@ -1,0 +1,19 @@
+.men-header{
+    background-image: url('https://img.freepik.com/free-photo/young-handsome-man-choosing-clothes-shop_1303-19720.jpg?w=1380&t=st=1692100702~exp=1692101302~hmac=afa693bbd299711f6dce705274ff5529ab0160b0384014857bd3673290119882');
+    background-repeat: no-repeat;
+    /* width: 100vw; */
+    height: 20rem;
+    background-size: cover;
+    color: white;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+
+    .men-header{
+        height: 13rem;
+    }
+}

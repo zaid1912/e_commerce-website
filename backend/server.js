@@ -17,8 +17,24 @@ app.use(express.json());
 //API endpoints
 
 
-app.get('/', (req, res) => res.status(200).send('Hello'));
+// app.get('/', (req, res) => res.status(200).send('Hello'));
 
+
+app.get('/', async(req, res) => {
+  try{
+    const query = `
+    SELECT * FROM products INNER JOIN featured ON products.product_id = featured.product_id
+    `;
+    const {rows} = await pool.query(query);
+    res.json(rows);
+
+  }
+
+  catch(error){
+    console.log('error fetching featured products', error);
+    res.status(500).send('Internal Server Error');
+  }
+})
 
 // API Endpoint to Fetch Men's Products
 app.get('/men', async (req, res) => {

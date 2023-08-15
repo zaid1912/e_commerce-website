@@ -1,0 +1,19 @@
+.women-header{
+    background-image: url('https://img.freepik.com/free-photo/high-fashion-portrait-young-elegant-blonde-woman-black-wool-hat-wearing-oversize-white-fringe-poncho-with-long-grey-dress_273443-3799.jpg?w=1380&t=st=1692101599~exp=1692102199~hmac=49751316e03fa6cc6bf008bc868e6fe9377a5b90f6dc221637dcfca787a1d17c');
+    background-repeat: no-repeat;
+    /* width: 100vw; */
+    height: 20rem;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+
+    .women-header{
+        height: 13rem;
+    }
+}
