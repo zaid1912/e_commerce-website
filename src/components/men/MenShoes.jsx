@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "../../axios";
-import ProductsCard from "../main-page/products/ProductsCard";
+import React, {useState, useEffect} from 'react'
+import axios from '../../axios';
+import ProductsCard from '../main-page/products/ProductsCard';
 
-function MenTops() {
-  const [menTops, setMenTops] = useState([]);
+function MenShoes() {
+  const [MenShoes, setMenShoes] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("men/tops");
-      setMenTops(response.data);
+      const response = await axios.get("men/shoes");
+      setMenShoes(response.data);
     }
     fetchData();
   }, []);
@@ -16,7 +16,7 @@ function MenTops() {
     <div className="horizCentre">
     <div className="products-header">
       <div className="all-featured-cards">
-        {menTops.map((product) => (
+        {MenShoes.map((product) => (
           <ProductsCard
             key={product.product_id}
             prod_id={product.product_id}
@@ -33,4 +33,4 @@ function MenTops() {
   );
 }
 
-export default MenTops;
+export default MenShoes

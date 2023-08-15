@@ -14,20 +14,23 @@ import Featured from "./components/main-page/products/featured/Featured";
 import HelpLayout from "./components/help-section/HelpLayout";
 import Faqs from "./components/help-section/Faqs";
 import Contact from "./components/help-section/Contact";
-import WomenAccessories from "./components/women/WomenAccessories";
+import WomenAccessories from "./components/women/WomenShoes";
 import WomenBottoms from "./components/women/WomenBottoms";
 import WomenJackets from "./components/women/WomenJackets";
 import MenBottoms from "./components/men/MenBottoms";
 import MenJackets from "./components/men/MenJackets";
 import MenTops from "./components/men/MenTops";
-import MenAccessories from "./components/men/MenAccessories";
-import KidsAccessories from "./components/kids/KidsAccessories";
+import MenAccessories from "./components/men/MenShoes";
+import KidsAccessories from "./components/kids/KidsShoes";
 import KidsBottoms from "./components/kids/KidsBottoms";
 import KidsJackets from "./components/kids/KidsJackets";
 import KidsTops from "./components/kids/KidsTops";
 import WomenAll from "./components/women/WomenAll";
 import MenAll from "./components/men/MenAll";
 import KidsAll from "./components/kids/KidsAll";
+import WomenShoes from "./components/women/WomenShoes";
+import MenShoes from "./components/men/MenShoes";
+import KidsShoes from "./components/kids/KidsShoes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,21 +47,21 @@ const router = createBrowserRouter(
           <Route path="tops" element={<WomenTops />} />
           <Route path="bottoms" element={<WomenBottoms />} />
           <Route path="jackets" element={<WomenJackets />} />
-          <Route path="accessories" element={<WomenAccessories />} />
+          <Route path="shoes" element={<WomenShoes />} />
         </Route>
         <Route path="men" element={<MenPage />}>
           <Route index element= {<MenAll/>}/>
           <Route path="tops" element={<MenTops />} />
           <Route path="bottoms" element={<MenBottoms />} />
           <Route path="jackets" element={<MenJackets />} />
-          <Route path="accessories" element={<MenAccessories />} />
+          <Route path="shoes" element={<MenShoes />} />
         </Route>
         <Route path="kids" element={<KidsPage />}>
           <Route index element= {<KidsAll/>}/>
           <Route path="tops" element={<KidsTops />} />
           <Route path="bottoms" element={<KidsBottoms />} />
           <Route path="jackets" element={<KidsJackets />} />
-          <Route path="accessories" element={<KidsAccessories />} />
+          <Route path="shoes" element={<KidsShoes />} />
         </Route>
       </Route>
     </>

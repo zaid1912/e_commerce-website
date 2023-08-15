@@ -1,9 +1,8 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
   /* Add other global styles here */
 }
@@ -24,49 +23,51 @@ a {
 }
 
 /* Apply styles to headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   /* Add other heading styles here */
 }
-h1{
+h1 {
   font-size: 2.5rem;
 }
-h2{
+h2 {
   font-size: 1.8rem;
 }
-p{
+p {
   font-size: 1rem;
 }
 /* Add other global styles for specific elements as needed */
 
 :root {
   /* Colors */
-  --primary-color: #519cff;      /* Main brand color */
-  --secondary-color: #6c757d;    /* Secondary color for buttons, etc. */
-  --background-color: #ffffff;   /* Background color of the website */
-  --text-color: #333333;         /* Default text color */
-  --link-color: var(--primary-color);   /* Color for links */
-  --link-color-hover: #0056b3;   /* Color for links on hover */
+  --primary-color: #519cff; /* Main brand color */
+  --secondary-color: #6c757d; /* Secondary color for buttons, etc. */
+  --background-color: #ffffff; /* Background color of the website */
+  --text-color: #333333; /* Default text color */
+  --link-color: var(--primary-color); /* Color for links */
+  --link-color-hover: #0056b3; /* Color for links on hover */
 
   /* Font */
-  --heading-font-family: 'Roboto', sans-serif; /* Font family for headings */
-  --base-font-size: 16px;        /* Default base font size */
+  --heading-font-family: "Roboto", sans-serif; /* Font family for headings */
+  --base-font-size: 16px; /* Default base font size */
 
   /* Spacing */
-  --spacing-xs: 4px;             /* Extra small spacing (4px) */
-  --spacing-sm: 8px;             /* Small spacing (8px) */
-  --spacing-md: 16px;            /* Medium spacing (16px) */
-  --spacing-lg: 24px;            /* Large spacing (24px) */
-  --spacing-xl: 32px;            /* Extra large spacing (32px) */
+  --spacing-xs: 4px; /* Extra small spacing (4px) */
+  --spacing-sm: 8px; /* Small spacing (8px) */
+  --spacing-md: 16px; /* Medium spacing (16px) */
+  --spacing-lg: 24px; /* Large spacing (24px) */
+  --spacing-xl: 32px; /* Extra large spacing (32px) */
 
   /* Border */
-  --border-radius: 4px;          /* Border radius for elements */
+  --border-radius: 4px; /* Border radius for elements */
 
   /* Box Shadows */
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default box shadow */
 }
 
-@media screen and(max-width:600px) {
-  
-  
-}
+

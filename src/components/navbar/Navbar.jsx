@@ -22,11 +22,8 @@ function Navbar() {
       <div className="nav-list">
       <NavLink to='/'>Home</NavLink>
       <NavLink to='/'>Shop</NavLink>
-        {/* <a onClick={() => handleScrollToSection("home")} href="">Home</a>
-        <a onClick={() => handleScrollToSection("categories")} href="#categories">Shop</a> */}
-        {/* <a onClick={() => handleScrollToSection("about")}>About</a> */}
+       
         <NavLink to='about'>About</NavLink>
-        {/* <a onClick={() => handleScrollToSection("contact")} href="">Contact</a> */}
         <NavLink to='help'>Help</NavLink>
       </div>
       <div className="right-nav">

@@ -1,5 +1,44 @@
 .categories-navbar{
     display: flex;
     justify-content: space-between;
+    width: 60%;
+    
+}
+/* Add this CSS class for underlined text */
+/* .active-link {
+    text-decoration: underline;
+    color: aquamarine;
+  } */
+
+ .categories-navbar a.active{
+    /* text-decoration: underline; */
+    color: var(--primary-color);
+    /* font-weight: bold; */
+  }
+
+  .categories-navbar a{
+    color: rgb(148, 148, 148);
+    font-weight: bold;
+    transition: 300ms ease;
+    /* padding-bottom: 15px; */
+  }
+  .categories-navbar a:hover{
+    color: black;
+
+  }
+  
+.centered-nav{
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    /* width: 10rem; */
+    /* align-items: center; */
+}
+
+@media screen and (max-width:600px) {
+    .categories-navbar{
+        width: 90%;
+    }
     
 }

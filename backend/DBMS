@@ -79,10 +79,17 @@ CREATE TABLE cart_items (
   cart_item_id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(user_id),
   product_id INTEGER REFERENCES products(product_id),
+  product_size_id INTEGER REFERENCES product_sizes(product_size_id),
+  product_shoe_size_id INTEGER REFERENCES product_shoe_sizes(product_shoe_size_id), -- Use the correct column name
   quantity INTEGER NOT NULL
 );
 
 
+DROP TABLE IF EXISTS featured;
+CREATE TABLE featured(
+  featured_id SERIAL PRIMARY KEY,
+  product_id INTEGER REFERENCES products(product_id)
+)
 
 
 
@@ -111,20 +118,171 @@ VALUES
   ('tops'),
   ('bottoms'),
   ('shoes'),
-  ('watches'),
   ('jackets');
 
 
 
 -- Insert data into the products table
+--Women Clothing Products
 INSERT INTO products (product_name, product_description, category_id, sub_category_id, price, image_url)
 VALUES
-  ('Mens T-Shirt', 'Comfortable cotton t-shirt for men', 1, 1, 19.99, 'https://preview.colorlib.com/theme/cozastore/images/product-03.jpg'),
-  ('Mens Jeans', 'Classic denim jeans for men', 1, 2, 39.99, 'https://preview.colorlib.com/theme/cozastore/images/product-03.jpg'),
-  ('Womens Dress', 'Elegant dress for women', 2, 1, 49.99, 'https://preview.colorlib.com/theme/cozastore/images/product-10.jpg'),
-  ('Womens Blouse', 'Stylish blouse for women', 2, 1, 29.99, 'https://preview.colorlib.com/theme/cozastore/images/product-04.jpg'),
-  ('Kids Shoes', 'Colorful shoes for kids', 3, 3, 29.99, 'https://preview.colorlib.com/theme/cozastore/images/product-09.jpg'),
-  ('Kids T-Shirt', 'Fun printed t-shirt for kids', 3, 1, 14.99, 'https://preview.colorlib.com/theme/cozastore/images/product-12.jpg');
+--women tops (Shirts)
+  ('Essential White Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 2, 1, 16.64, '	https://preview.colorlib.com/theme/cozastore/images/product-01.jpg'),
+  ('Classic white Button-up', 'Upgrade your style with our Womens White Button-Up Plain Shirt. A wardrobe essential that effortlessly combines sophistication and comfort. Whether for the office or a casual outing, this shirt offers endless versatility. Elevate your look with its crisp design and timeless charm.', 2, 1, 35.31, 'https://preview.colorlib.com/theme/cozastore/images/product-02.jpg'),
+  ('Classic Printed t-shirt', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 25.31, 'https://preview.colorlib.com/theme/cozastore/images/product-08.jpg'),
+  ('Essential black shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 2, 1, 16.31, 'https://preview.colorlib.com/theme/cozastore/images/product-10.jpg'),
+  ('Classic Button-up', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 29.31, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbvsMTT_AwptURJmlUwcRY_Tbho_ZW9DbXZw&usqp=CAU'),
+  ('Classic Blue Button-up', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 35.31, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLkUpv4VddgichR2GaYxVBW-8D2LcdpMFiDg&usqp=CAU'),
+  ('Classic Pink t-shirt', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 25.30, 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.hanes.com%2Fcatalog%2Fproduct%2FH%2FN%2FHNS_28PT%2FHNS_28PT_ConcentratedCoralPeHeather_Front.jpg%3Fwidth%3D355%26quality%3D100%26bg-color%3D255%2C255%2C255&tbnid=zuVRAm7zskRCUM&vet=12ahUKEwjxybGqhtyAAxU9kicCHZ9tA4YQMyhXegUIARC9AQ..i&imgrefurl=https%3A%2F%2Fwww.hanes.com%2Fwomen%2Ftops%2Ft-shirts.html&docid=KON_vuHcyhV9lM&w=355&h=450&q=women%20shirts&ved=2ahUKEwjxybGqhtyAAxU9kicCHZ9tA4YQMyhXegUIARC9AQ'),
+  ('Classic Stripes Shirt', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 45.31, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvdsz8ul7MeRet-zc8V6JHZ4Fg6M9C8Fp4XQ&usqp=CAU'),
+  ('Women flannel Red', 'This timeless piece features a tasteful print that adds a touch of sophistication to your everyday look. Crafted with comfort in mind.', 2, 1, 55.31, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyNfnMjxd1Pl28iSMuieCj5rvalhV1Xf7-kfpxaahsMpW861-_JWi4lDif1A46i5cE4gg&usqp=CAU'),
+
+
+
+  --women bottom
+  ('Oversized Denim', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 35.31, 'https://img.freepik.com/free-photo/girl_1303-4477.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Comfortable Jeans', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 32.31, 'https://img.freepik.com/free-photo/blue-line-loose-pants-women-s-apparel_53876-102870.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Women Classic Tousers', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 40.31, 'https://img.freepik.com/free-photo/woman-posing_1303-3732.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Loungewear Trousers', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 15.31, 'https://img.freepik.com/free-photo/business-woman-standing-full-length-white-background_231208-2025.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Fancy Jeans', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 42.31, 'https://img.freepik.com/free-photo/busy-businesswoman-talking-mobile-phone_329181-3910.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Essential Pants', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 34.31, 'https://img.freepik.com/free-photo/ginger-head-woman-with-colorful-outfit_23-2149441379.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Evryday Pants', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 45.31, 'https://img.freepik.com/free-photo/blue-line-loose-pants-women-s-apparel-rear-view_53876-102139.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Stylish Bottoms', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 19.31, 'https://img.freepik.com/free-photo/snapshot-asian-woman-brown-pants-white-t-shirt_197531-17014.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Striped Jeans', 'Experience unmatched comfort and style with our Comfortable Womens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 2, 2, 20.31, 'https://img.freepik.com/free-photo/young-woman-wearing-black-hat-using-mobile-phone_23-2148148182.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+
+
+  --women Shoes
+  ('Classic Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 35.31, 'https://img.freepik.com/premium-photo/close-up-male-legs-black-pants-white-casual-sneakers-men-s-leather-summer-shoes_173815-36655.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Classic Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 33.31, 'https://img.freepik.com/premium-psd/cool-shoe-mockup_417483-985.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Classic Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 45.31, 'https://img.freepik.com/free-photo/one-black-sneaker-shoe-isolated-white_93675-131266.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Classic Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 55.31, 'https://img.freepik.com/free-photo/white-high-top-sneakers-unisex-footwear-fashion_53876-106036.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Formal White', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 35.31, 'https://img.freepik.com/free-photo/spring-wardrobe-switch-still-life_23-2150176691.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Classic Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 55.31, 'https://img.freepik.com/free-photo/one-white-sneaker-shoe-isolated-white_93675-133980.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Red Sueade Heels', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 65.31, 'https://img.freepik.com/free-photo/women-s-red-high-heel-shoes-formal-fashion_53876-101501.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Formal Golden Heels', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 65.31, 'https://img.freepik.com/free-photo/women-heeled-shoes_1303-5875.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  ('Basic White Heels', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 2, 3, 35.31, 'https://img.freepik.com/free-photo/women-rsquo-s-white-high-heel-shoes-fashion_53876-106046.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=sph'),
+  
+
+
+  --women jackets
+  ('Classic Trench Coat', 'Timeless and sophisticated, this coat effortlessly combines style and functionality. Crafted with precision, the classic trench design features a flattering silhouette and a waist belt for a tailored fit. Its versatile nature makes it a staple piece for both formal and casual occasions.', 2, 4, 69.76, 'https://preview.colorlib.com/theme/cozastore/images/product-04.jpg'),
+  ('Front Pocket Jumper', 'This versatile piece combines comfort and style, making it a must-have addition to your wardrobe. The front pocket detail adds a touch of flair, while the relaxed fit ensures all-day comfort. Crafted from high-quality materials, this jumper offers a cozy feel without compromising on fashion.', 2, 4, 49.60, 'https://preview.colorlib.com/theme/cozastore/images/product-05.jpg'),
+  ('Classic Gray Blazer', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 59.60, 'https://preview.colorlib.com/theme/cozastore/images/product-07 .jpg'),
+  ('Classic Brown Warm Zipper', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 59.60, 'https://img.freepik.com/free-photo/face-people-posing-makeup-female_1303-458.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 79.60, 'https://img.freepik.com/free-photo/woman-red-jacket_1303-3718.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Yellow Smart Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 49.60, 'https://img.freepik.com/free-photo/young-woman-yellow-jacket-using-phone-outside-street_1303-16820.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Blue Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 59.60, 'https://img.freepik.com/free-photo/young-attractive-woman-blue-winter-jacket_1303-20110.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Brown Leather Coat', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 99.60, 'https://img.freepik.com/free-photo/young-woman-jacket-outside-street_1303-25154.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Black Long Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 2, 4, 89.60, 'https://img.freepik.com/free-photo/stylish-woman-posing-winter-autumn-fashion-trend-black-puffer-coat-leather-hat-beret-old-beautiful-street_285396-6970.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais');
+
+
+
+
+  --Men Clothing Products
+  INSERT INTO products (product_name, product_description, category_id, sub_category_id, price, image_url)
+  VALUES
+
+  --Men Tops(Shirts)
+  ('Short Sleeve Buttom-up', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 26.64, '	https://preview.colorlib.com/theme/cozastore/images/product-03.jpg'),
+  ('Formal Blue Button-up', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 23.64, '	https://preview.colorlib.com/theme/cozastore/images/product-11.jpg'),
+  ('Olive Green Button-up', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 20.64, 'https://img.freepik.com/free-photo/basic-green-shirt-men-rsquo-s-fashion-apparel-studio-shoot_53876-101197.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Casual Blue Button-up', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 24.64, 'https://img.freepik.com/free-photo/vertical-shot-successful-male-standing-with-hand-pocket_181624-44739.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Men Flannel', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 30.64, 'https://img.freepik.com/free-photo/elegant-young-handsome-man_1301-5868.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Men Flannel', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 36.64, 'https://img.freepik.com/free-photo/portrait-handsome-single-bearded-young-man-with-serious-expression-gray-wall-with-copy-space_231208-7753.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Formal Green Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 34.64, 'https://img.freepik.com/free-photo/serious-young-man-standing-isolated-grey_171337-10386.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Formal White Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 32.64, 'https://img.freepik.com/free-photo/portrait-handsome-young-man_158595-243.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Casual Button-up', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 1, 1, 31.64, 'https://img.freepik.com/free-photo/fashion-portrait-young-caucasian-man-handsome-model-casual-clothes-posing-studio-attractive-male_158538-13685.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  
+  --Men Bottoms
+  ('Basic Chinos', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 20.31, 'https://img.freepik.com/free-photo/man-wearing-brown-pants-close-up_53876-102239.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Basic Chinos ', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 30.31, 'https://img.freepik.com/free-photo/full-length-portrait-confident-smiling-african-man_171337-8185.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Chinos', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 23.31, 'https://img.freepik.com/free-photo/man-navy-blue-shirt-pants-casual-wear-fashion-full-body_53876-125244.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Light Blue Denim', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 22.31, 'https://img.freepik.com/free-photo/man-navy-jacket-jeans-streetwear_53876-108579.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Black Denim', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 33.31, 'https://img.freepik.com/free-photo/handsome-man-wearing-sunglasses-standing-grey-wall_171337-14981.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Relaxed Fit Cotton Pants', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 24.31, 'https://img.freepik.com/free-photo/black-turtleneck-t-shirt-men-s-business-wear_53876-104304.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Cargo Pants', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 23.31, 'https://img.freepik.com/free-photo/young-man-posing-outdoor_23-2148883566.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Black Chinos', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 22.31, 'https://img.freepik.com/free-photo/man-sportswear-pavement_23-2147775440.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Dark Blue Denim', 'Experience unmatched comfort and style with our Comfortable mens Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 1, 2, 29.31, 'https://img.freepik.com/free-photo/pleasant-african-man-white-shoes-looking-down-with-smile-indoor-photo-good-humoured-male-model-with-curly-hairstyle_197531-20309.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+
+
+  --Men Shoes
+  ('Basic Sneakers', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 25.31, 'https://img.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Brown Wingtip Formal', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 65.31, 'https://img.freepik.com/free-photo/brown-leather-shoes_1203-8175.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Casual Brown Seuade', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 45.31, 'https://img.freepik.com/free-photo/brown-leather-shoes_1203-7562.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Casual Leather Brown', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 65.31, 'https://img.freepik.com/free-photo/sneakers-shoes_1203-8036.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Casual Seuade Brown', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 35.31, 'https://img.freepik.com/free-photo/brown-leather-shoes_1203-7613.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Brown Formal Leather', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 85.31, 'https://img.freepik.com/free-photo/male-brown-footwear-close-up_1303-10300.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Running Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 35.31, 'https://img.freepik.com/free-photo/pair-trainers_144627-3800.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Semi-formal Red Wingtip', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 1, 3, 95.31, 'https://img.freepik.com/free-photo/red-leather-shoes-stand-light-wooden-floor_8353-691.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+
+
+  --Men Jackets
+  ('Basic Blue Denim Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 69.60, 'https://img.freepik.com/free-photo/man-portrait_1296-628.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Stylish White Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 89.60, 'https://img.freepik.com/free-photo/smiling-young-man-winter-warm-coat-with-fur-hood_613910-10758.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Double layered warm Brown Seuade Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 99.60, 'https://img.freepik.com/free-photo/young-handsome-man-street-outfit_1303-19659.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Shiny Black Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 59.60, 'https://img.freepik.com/free-photo/handsome-man-leather-jacket_144627-3574.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Black Stylish Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 69.60, 'https://img.freepik.com/free-photo/portrait-young-handsome-male_23-2148884392.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Basic Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 49.60, 'https://img.freepik.com/free-photo/portrait-young-handsome-male_23-2148884400.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Brown Seuade Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 69.60, 'https://img.freepik.com/free-photo/autumn-person-with-beautiful-hat_23-2149137833.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Stylish Gray Overcoat', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 109.60, 'https://img.freepik.com/free-photo/handsome-man-posing-outdoors_23-2148323623.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Olive Green Coat', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 1, 4, 99.60, 'https://img.freepik.com/free-photo/side-view-handsome-man-looking-away-outside_23-2148448870.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais');
+
+
+
+
+  
+  --Kids Clothing Products
+  INSERT INTO products (product_name, product_description, category_id, sub_category_id, price, image_url)
+  VALUES
+
+  --Kids Tops(Shirts)
+  ('Basic White Short Sleeves', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 36.64, 'https://img.freepik.com/free-photo/child-summer-park-boy-white-t-shirt-kid-with-skate_1157-42006.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Basic Blue Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 26.64, 'https://img.freepik.com/free-photo/front-view-boy-blue-t-shirt-khaki-trousers-riding-segway-pink-space_179666-872.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Basic White Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 36.64, 'https://img.freepik.com/free-photo/girl-with-white-tee-denim-jacket_53876-98497.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Polo Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 46.64, 'https://img.freepik.com/free-photo/young-beautiful-boy-posing-as-fashion-model_186202-2920.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Flanner Stylish', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 56.64, 'https://img.freepik.com/free-photo/low-angle-little-boy-posing_23-2148445671.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Boys Sweatshirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 46.64, 'https://img.freepik.com/free-photo/cheerful-boy-with-glove-knit-hat_329181-5255.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Short Sleeves Denim Shirt', 'This versatile piece brings timeless elegance to your look. Crafted for comfort and style, it is perfect for any occasion. Dress it up or down effortlessly.', 3, 1, 56.64, 'https://img.freepik.com/free-photo/kid-studio-portrait-isolated_23-2149198859.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  
+
+  --Kids Bottoms
+
+  ('Blue denim Jeans', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 20.31, 'https://img.freepik.com/free-photo/low-angle-little-boy-posing_23-2148445671.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Gray Denim Jeans', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 30.31, 'https://img.freepik.com/free-photo/full-length-portrait-cute-little-kid-boy-stylish-jeans-clothes-smiling-standing-white-kids-fashion-concept_155003-20308.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Yellow Chinos', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 20.31, 'https://img.freepik.com/free-photo/pretty-young-boy-casual-clothes-white-studio-wall_155003-37470.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Light Trousers', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 20.31, 'https://img.freepik.com/free-photo/portrait-young-girl-with-skateboard_23-2149185137.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Trousers', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 25.31, 'https://img.freepik.com/free-photo/girl-wearing-two-tone-pajamas_53876-97846.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Chinos Kids', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 30.31, 'https://img.freepik.com/free-photo/kid-studio-portrait-isolated_23-2149198859.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Gray denim Girls Style', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 26.31, 'https://img.freepik.com/free-photo/full-shot-girl-posing-with-hat_23-2149853322.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Black Denim Jeans', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 20.31, 'https://img.freepik.com/free-photo/portrait-cool-teenage-boy-wearing-hoodie_23-2149085833.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Casual Blue Leggings', 'Experience unmatched comfort and style with our Comfortable Kids Bottoms. Designed to provide a perfect blend of relaxation and fashion.', 3, 2, 30.31, 'https://img.freepik.com/free-photo/children-sport_23-2148108598.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  
+
+
+  --Kids Shoes
+  ('Basic White Sneakers', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 25.31, 'https://img.freepik.com/free-photo/portrait-cool-teenage-boy-wearing-hoodie_23-2149085833.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Running Shoes Kids', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 35.31, 'https://img.freepik.com/free-photo/close-up-cute-child-portrait_23-2149153310.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Stylish Girls Long Boots', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 25.31, 'https://img.freepik.com/free-photo/stylish-young-teen-girl_155003-2515.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Comfortable Sneakers', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 23.31, 'https://img.freepik.com/free-photo/child-wearing-jeans-white-sneakers_53876-98496.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Black Leather Long Boots', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 55.31, 'https://img.freepik.com/free-photo/stylish-young-teen-girl_155003-2516.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Stylish Red Heels', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 51.31, 'https://img.freepik.com/free-photo/charming-girl-dress-sitting-floor-lotus-pose-with-hand-cheek_176420-42488.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Running Shoes', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 25.31, 'https://img.freepik.com/free-photo/front-view-smiling-boy-white-t-shirt-riding-scateboard-blue-backgorund_179666-1128.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Long Boots', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 62.31, 'https://img.freepik.com/free-photo/full-shot-cool-girl-posing_23-2149067064.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('White Sneakers with Blue', 'Step into fashion-forward style and unmatched comfort with our collection of Shoes. From casual to formal, our diverse range of footwear is designed to cater to every occasion.', 3, 3, 31.31, 'https://img.freepik.com/free-photo/girl-with-white-sneakers_53876-97836.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  
+
+
+  --Kids Jackets
+  ('Green Boys Hoodie', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 59.20, 'https://img.freepik.com/free-photo/front-view-modern-boy-with-sunglasses-posing_23-2148423111.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Puffer Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 39.20, 'https://img.freepik.com/free-photo/little-boy-walking-school-with-backpack_1098-1745.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Relaxed Fit Green Collar Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 69.20, 'https://img.freepik.com/free-photo/close-up-cute-child-portrait_23-2149153293.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Stylish Yerllow Sweater', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 59.20, 'https://img.freepik.com/free-photo/full-shot-girl-wearing-hat_23-2149853324.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Girls Long Leather Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 72.20, 'https://img.freepik.com/free-photo/autumn-person-with-beautiful-hat_23-2149137827.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Double Layer Denim Jacket', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 59.20, 'https://img.freepik.com/free-photo/boy-posing-with-his-bike-outside-city_23-2148817336.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais'),
+  ('Red Long Coat', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 79.20, 'https://img.freepik.com/free-photo/full-length-portrait-bright-fashionable-girl-red-raincoat-with-black-bag-posing-yellow-studio-wall_155003-26309.jpg?size=626&ext=jpg&ga=GA1.1.1957142998.1692014501&semt=ais'),
+  ('Red Frok Styled Coat', 'Wrap yourself in warmth and style with our Jackets and Coats collection. Whether braving the chill or making a fashion statement, our range offers the perfect outerwear to suit every need. ', 3, 4, 69.20, 'https://img.freepik.com/free-photo/full-length-portrait-bright-fashionable-girl-red-raincoat-with-black-bag-posing-yellow-studio-wall_155003-26312.jpg?size=626&ext=jpg&ga=GA1.2.1957142998.1692014501&semt=ais');
+  
+--   select * from products
 
 -- SELECT sub_category.sub_category_name, products.*
 -- FROM sub_category
@@ -144,43 +302,180 @@ VALUES
 -- Insert data into the product_sizes table
 INSERT INTO product_sizes (product_id, size_id, quantity_available)
 VALUES
-  (1, 1, 50), -- Men's T-Shirt, Size S, Quantity: 50
-  (1, 2, 30), -- Men's T-Shirt, Size M, Quantity: 30
-  (1, 3, 20), -- Men's T-Shirt, Size L, Quantity: 20
-  (1, 4, 10), -- Men's T-Shirt, Size XL, Quantity: 10
-  (2, 2, 40), -- Men's Jeans, Size M, Quantity: 40
-  (2, 3, 35), -- Men's Jeans, Size L, Quantity: 35
-  (2, 4, 25), -- Men's Jeans, Size XL, Quantity: 25
-  (3, 2, 15), -- Women's Dress, Size M, Quantity: 15
-  (3, 3, 25), -- Women's Dress, Size L, Quantity: 25
-  (4, 1, 20), -- Women's Blouse, Size S, Quantity: 20
-  (4, 2, 30), -- Women's Blouse, Size M, Quantity: 30
-  (4, 3, 25), -- Women's Blouse, Size L, Quantity: 25
-  (6, 1, 50), -- Kids' T-Shirt, Size S, Quantity: 50
-  (6, 2, 45); -- Kids' T-Shirt, Size M, Quantity: 45
+  (73, 1, 50), (73, 2, 30), (73, 3, 20), (73, 4, 10),
+  
+  -- Product ID 74
+  (74, 1, 25), (74, 2, 40), (74, 3, 30), (74, 4, 20),
+  (75, 1, 25), (75, 2, 40), (75, 3, 30), (75, 4, 20),
+  (76, 1, 25), (76, 2, 40), (76, 3, 30), (76, 4, 20),
+  (77, 1, 25), (77, 2, 40), (77, 3, 30), (77, 4, 20),
+  (78, 1, 25), (78, 2, 40), (78, 3, 30), (78, 4, 20),
+  (79, 1, 25), (79, 2, 40), (79, 3, 30), (79, 4, 20),
+  (80, 1, 25), (80, 2, 40), (80, 3, 30), (80, 4, 20),
+  (81, 1, 25), (81, 2, 40), (81, 3, 0), (81, 4, 20),
+  (82, 1, 25), (82, 2, 40), (82, 3, 30), (82, 4, 20),
+  (83, 1, 25), (83, 2, 40), (83, 3, 30), (83, 4, 20),
+  (84, 1, 25), (84, 2, 40), (84, 3, 30), (84, 4, 20),
+  (85, 1, 25), (85, 2, 40), (85, 3, 30), (85, 4, 20),
+  (86, 1, 25), (86, 2, 40), (86, 3, 0), (86, 4, 20),
+  (87, 1, 25), (87, 2, 40), (87, 3, 30), (87, 4, 20),
+  (88, 1, 25), (88, 2, 40), (88, 3, 30), (88, 4, 20),
+  (89, 1, 25), (89, 2, 0), (89, 3, 30), (89, 4, 20),
+  (90, 1, 25), (90, 2, 0), (90, 3, 30), (90, 4, 20),
+  -- (91, 1, 25), (91, 2, 40), (91, 3, 30), (91, 4, 20),
+  -- (92, 1, 25), (92, 2, 40), (92, 3, 30), (92, 4, 20),
+  -- (93, 1, 25), (93, 2, 40), (93, 3, 30), (93, 4, 20),
+  -- (94, 1, 25), (94, 2, 40), (94, 3, 30), (94, 4, 20),
+  -- (95, 1, 25), (95, 2, 40), (95, 3, 30), (95, 4, 20),
+  -- (96, 1, 25), (96, 2, 40), (96, 3, 30), (96, 4, 20),
+  -- (97, 1, 25), (97, 2, 40), (97, 3, 30), (97, 4, 20),
+  -- (98, 1, 25), (98, 2, 40), (98, 3, 30), (98, 4, 20),
+  -- (99, 1, 25), (99, 2, 40), (99, 3, 30), (99, 4, 20),
+  (100, 1, 25), (100, 2, 40), (100, 3, 30), (100, 4, 20),
+  (101, 1, 25), (101, 2, 40), (101, 3, 30), (101, 4, 20),
+  (102, 1, 25), (102, 2, 40), (102, 3, 30), (102, 4, 20),
+  (103, 1, 25), (103, 2, 40), (103, 3, 30), (103, 4, 20),
+  (104, 1, 25), (104, 2, 40), (104, 3, 30), (104, 4, 20),
+  (105, 1, 25), (105, 2, 40), (105, 3, 30), (105, 4, 20),
+  (106, 1, 25), (106, 2, 40), (106, 3, 30), (106, 4, 20),
+  (107, 1, 25), (107, 2, 40), (107, 3, 30), (107, 4, 20),
+  (108, 1, 25), (108, 2, 40), (108, 3, 30), (108, 4, 20),
+  (109, 1, 25), (109, 2, 40), (109, 3, 30), (109, 4, 20),
+  (110, 1, 25), (110, 2, 40), (110, 3, 30), (110, 4, 20),
+  (111, 1, 25), (111, 2, 40), (111, 3, 30), (111, 4, 20),
+  (112, 1, 25), (112, 2, 40), (112, 3, 30), (112, 4, 20),
+  (113, 1, 25), (113, 2, 40), (113, 3, 30), (113, 4, 20),
+  -- (112, 1, 25), (112, 2, 40), (112, 3, 30), (112, 4, 20),
+  -- (113, 1, 25), (113, 2, 40), (113, 3, 30), (113, 4, 20),
+  (114, 1, 25), (114, 2, 40), (114, 3, 30), (114, 4, 20),
+  (115, 1, 25), (115, 2, 40), (115, 3, 30), (115, 4, 20),
+  (116, 1, 25), (116, 2, 40), (116, 3, 30), (116, 4, 20),
+  (117, 1, 25), (117, 2, 40), (117, 3, 30), (117, 4, 20),
+  (118, 1, 25), (118, 2, 10), (118, 3, 30), (118, 4, 20),
+  (119, 1, 25), (119, 2, 5), (119, 3, 30), (119, 4, 20),
+  (120, 1, 25), (120, 2, 40), (120, 3, 30), (120, 4, 20),
+  (121, 1, 25), (121, 2, 40), (121, 3, 30), (121, 4, 20),
+  (122, 1, 25), (122, 2, 40), (122, 3, 30), (122, 4, 20),
+  (123, 1, 25), (123, 2, 40), (123, 3, 30), (123, 4, 20),
+  (124, 1, 25), (124, 2, 40), (124, 3, 30), (124, 4, 20),
+  (125, 1, 25), (125, 2, 40), (125, 3, 30), (125, 4, 20),
+  (126, 1, 25), (126, 2, 40), (126, 3, 30), (126, 4, 20),
+  -- (127, 1, 25), (127, 2, 40), (127, 3, 30), (127, 4, 20),
+  -- (128, 1, 25), (128, 2, 40), (128, 3, 30), (128, 4, 20),
+  -- (129, 1, 25), (129, 2, 40), (129, 3, 30), (129, 4, 20),
+  -- (130, 1, 25), (130, 2, 40), (130, 3, 30), (130, 4, 20),
+  -- (131, 1, 25), (131, 2, 40), (131, 3, 30), (131, 4, 20),
+  -- (132, 1, 25), (132, 2, 40), (132, 3, 30), (132, 4, 20),
+  -- (133, 1, 25), (133, 2, 40), (133, 3, 30), (133, 4, 20),
+  -- (134, 1, 25), (134, 2, 40), (134, 3, 30), (134, 4, 20),
+  (135, 1, 25), (135, 2, 40), (135, 3, 30), (135, 4, 20),
+  (136, 1, 25), (136, 2, 40), (136, 3, 30), (136, 4, 20),
+  (137, 1, 25), (137, 2, 40), (137, 3, 30), (137, 4, 20),
+  (138, 1, 25), (138, 2, 40), (138, 3, 30), (138, 4, 20),
+  (139, 1, 25), (139, 2, 40), (139, 3, 0), (139, 4, 20),
+  (140, 1, 25), (140, 2, 40), (140, 3, 0), (140, 4, 20),
+  (141, 1, 25), (141, 2, 40), (141, 3, 0), (141, 4, 20),
+  (142, 1, 25), (142, 2, 40), (142, 3, 0), (142, 4, 20),
+  (143, 1, 25), (143, 2, 40), (143, 3, 30), (143, 4, 20),
+  (144, 1, 25), (144, 2, 40), (144, 3, 30), (144, 4, 20),
+  (145, 1, 25), (145, 2, 40), (145, 3, 30), (145, 4, 20),
+  (146, 1, 25), (146, 2, 40), (146, 3, 30), (146, 4, 20),
+  (147, 1, 25), (147, 2, 40), (147, 3, 30), (147, 4, 20),
+  (148, 1, 25), (148, 2, 40), (148, 3, 30), (148, 4, 20),
+  (149, 1, 25), (149, 2, 40), (149, 3, 30), (149, 4, 20),
+  (150, 1, 25), (150, 2, 40), (150, 3, 30), (150, 4, 20),
+  (151, 1, 25), (151, 2, 40), (151, 3, 30), (151, 4, 20),
+  (152, 1, 25), (152, 2, 40), (152, 3, 30), (152, 4, 20),
+  (153, 1, 25), (153, 2, 40), (153, 3, 30), (153, 4, 20),
+  (154, 1, 25), (154, 2, 40), (154, 3, 30), (154, 4, 20),
+  (155, 1, 25), (155, 2, 40), (155, 3, 30), (155, 4, 20),
+  (156, 1, 25), (156, 2, 40), (156, 3, 30), (156, 4, 20),
+  (157, 1, 25), (157, 2, 40), (157, 3, 30), (157, 4, 20),
+  (158, 1, 25), (158, 2, 40), (158, 3, 30), (158, 4, 20),
+  (159, 1, 25), (159, 2, 40), (159, 3, 30), (159, 4, 20),
+  -- (160, 1, 25), (160, 2, 40), (160, 3, 30), (160, 4, 20),
+  -- (161, 1, 25), (161, 2, 40), (161, 3, 30), (161, 4, 20),
+  -- (162, 1, 25), (162, 2, 40), (162, 3, 30), (162, 4, 20),
+  -- (163, 1, 25), (163, 2, 40), (163, 3, 30), (163, 4, 20),
+  -- (164, 1, 25), (164, 2, 40), (164, 3, 30), (164, 4, 20),
+  -- (165, 1, 25), (165, 2, 40), (165, 3, 30), (165, 4, 20),
+  -- (166, 1, 25), (166, 2, 40), (166, 3, 30), (166, 4, 20),
+  -- (167, 1, 25), (167, 2, 40), (167, 3, 30), (167, 4, 20),
+  -- (168, 1, 25), (168, 2, 40), (168, 3, 30), (168, 4, 20),
+  (169, 1, 25), (169, 2, 40), (169, 3, 30), (169, 4, 20),
+  (170, 1, 25), (170, 2, 40), (170, 3, 30), (170, 4, 20),
+  (171, 1, 25), (171, 2, 40), (171, 3, 30), (171, 4, 20),
+  (172, 1, 25), (172, 2, 40), (172, 3, 30), (172, 4, 20),
+  (173, 1, 25), (173, 2, 40), (173, 3, 30), (173, 4, 20),
+  (174, 1, 25), (174, 2, 40), (174, 3, 30), (174, 4, 20),
+  (175, 1, 25), (175, 2, 40), (175, 3, 30), (175, 4, 20),
+  (176, 1, 25), (176, 2, 40), (176, 3, 30), (176, 4, 20);
+  
+  
+  
 
 -- Insert data into the shoe_sizes table
 INSERT INTO shoe_sizes (shoe_size)
 VALUES
-  (38),
-  (39),
+ 
   (40),
   (41),
   (42),
   (43),
   (44),
-  (45),
-  (46),
-  (47);
+  (45);
+ 
 
 -- Insert data into the product_shoe_sizes table
 INSERT INTO product_shoe_sizes (product_id, shoe_size_id, quantity_available)
 VALUES
-  (5, 38, 20), -- Kids' Shoes, Shoe Size 38, Quantity: 20
-  (5, 39, 25), -- Kids' Shoes, Shoe Size 39, Quantity: 25
-  (5, 40, 30), -- Kids' Shoes, Shoe Size 40, Quantity: 30
-  (5, 41, 15), -- Kids' Shoes, Shoe Size 41, Quantity: 15
-  (5, 42, 20); -- Kids' Shoes, Shoe Size 42, Quantity: 20
+
+(91, 1, 50),(91, 2, 50),(91, 3, 50),(91, 4, 50),(91, 5, 50),(91, 6, 50),
+(92, 1, 50),(92, 2, 50),(92, 3, 50),(92, 4, 50),(92, 5, 50),(92, 6, 50),
+(93, 1, 50),(93, 2, 50),(93, 3, 50),(93, 4, 50),(93, 5, 50),(93, 6, 50),
+(94, 1, 50),(94, 2, 50),(94, 3, 50),(94, 4, 50),(94, 5, 50),(94, 6, 50),
+(95, 1, 50),(95, 2, 50),(95, 3, 50),(95, 4, 50),(95, 5, 50),(95, 6, 50),
+(96, 1, 50),(96, 2, 50),(96, 3, 50),(96, 4, 50),(96, 5, 50),(96, 6, 50),
+(97, 1, 50),(97, 2, 50),(97, 3, 50),(97, 4, 50),(97, 5, 50),(97, 6, 50), 
+(98, 1, 50),(98, 2, 50),(98, 3, 50),(98, 4, 50),(98, 5, 50),(98, 6, 50),
+(99, 1, 50),(99, 2, 50),(99, 3, 50),(99, 4, 50),(99, 5, 50),(99, 6, 50),
+
+(127, 1, 50),(127, 2, 50),(127, 3, 0),(127, 4, 50),(127, 5, 50),(127, 6, 50),
+(128, 1, 50),(128, 2, 50),(128, 3, 50),(128, 4, 50),(128, 5, 50),(128, 6, 50),
+(129, 1, 50),(129, 2, 50),(129, 3, 50),(129, 4, 50),(129, 5, 50),(129, 6, 50),
+(130, 1, 50),(130, 2, 50),(130, 3, 50),(130, 4, 0),(130, 5, 0),(130, 6, 0),
+(131, 1, 50),(131, 2, 50),(131, 3, 50),(131, 4, 50),(131, 5, 50),(131, 6, 50),
+(132, 1, 50),(132, 2, 50),(132, 3, 50),(132, 4, 50),(132, 5, 50),(132, 6, 50),
+(133, 1, 50),(133, 2, 50),(133, 3, 50),(133, 4, 50),(133, 5, 50),(133, 6, 50),
+(134, 1, 10),(134, 2, 0),(134, 3, 50),(134, 4, 50),(134, 5, 0),(134, 6, 50),
+
+(160, 1, 10),(160, 2, 0),(160, 3, 50),(160, 4, 50),(160, 5, 0),(160, 6, 50),
+(161, 1, 10),(161, 2, 10),(161, 3, 50),(161, 4, 50),(161, 5, 0),(161, 6, 10),
+(162, 1, 10),(162, 2, 30),(162, 3, 50),(162, 4, 50),(162, 5, 0),(162, 6, 50),
+(163, 1, 10),(163, 2, 40),(163, 3, 50),(163, 4, 50),(163, 5, 0),(163, 6, 0),
+(164, 1, 10),(164, 2, 50),(164, 3, 50),(164, 4, 50),(164, 5, 0),(164, 6, 50),
+(165, 1, 10),(165, 2, 20),(165, 3, 50),(165, 4, 50),(165, 5, 0),(165, 6, 50),
+(166, 1, 10),(166, 2, 30),(166, 3, 50),(166, 4, 50),(166, 5, 0),(166, 6, 50),
+(167, 1, 0),(167, 2, 0),(167, 3, 50),(167, 4, 0),(167, 5, 0),(167, 6, 50),
+(168, 1, 10),(168, 2, 10),(168, 3, 50),(168, 4, 50),(168, 5, 0),(168, 6, 50);
+
+
+
+INSERT INTO featured (product_id)
+VALUES
+  (110),  -- Product ID 1
+  (75),  -- Product ID 7
+  (112), -- Product ID 12
+  (85), -- Product ID 18
+  (125), -- Product ID 25
+  (130), -- Product ID 30
+  (138), -- Product ID 38
+  (145), -- Product ID 45
+  (150), -- Product ID 50
+  (156), -- Product ID 56
+  (161), -- Product ID 61
+  (168); -- Product ID 68
+
 
 
 -- Insert data into the favourites table

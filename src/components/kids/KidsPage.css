@@ -1,0 +1,19 @@
+.kids-header{
+    background-image: url('https://img.freepik.com/free-photo/dancing-team-studio_1303-10928.jpg?w=1380&t=st=1692101764~exp=1692102364~hmac=b33532e572f259a7abaade744087c984210b29f500c4f4b683dfc7bb5784f2e7');
+    background-repeat: no-repeat;
+    /* width: 100vw; */
+    height: 20rem;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+
+    .kids-header{
+        height: 13rem;
+    }
+}
