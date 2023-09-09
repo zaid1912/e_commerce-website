@@ -480,7 +480,7 @@ VALUES
 
 -- Insert data into the favourites table
 INSERT INTO favourites (user_id, product_id)
-VALUES
+VALU
   (1, 1), -- User with ID 1 favorited Men's T-Shirt with ID 1
   (1, 3), -- User with ID 1 favorited Kids' Shoes with ID 3
   (2, 2), -- User with ID 2 favorited Men's Jeans with ID 2

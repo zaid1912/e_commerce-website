@@ -2,8 +2,11 @@
     padding: 2rem 8rem;
     display: flex;
     flex-direction: row;
+    margin-top: 2rem;
     /* justify-content: space-between; */
     justify-content: space-around;
+    border: transparent;
+    /* position: relative; */
 }
 
 .modal-image img {
@@ -13,6 +16,7 @@
 .close-modal-btn {
     background: transparent;
     border: none;
+    color: black;
     /* display: flex;
     justify-content: end;
     align-items: end; */
@@ -88,9 +92,7 @@
     font-size: 0.9rem;
     transition: all 300ms ease;
 }
-.cart-btn:hover{
-    background-color: black;
-}
+
 .article-number{
     color: rgb(121, 121, 121);
     margin: 1.5rem 1rem;
