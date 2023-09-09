@@ -6,18 +6,50 @@ import Modal from "react-modal";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import "./modal.css";
+import { useContext } from "react";
+import CartContext from "../../context/CartContext";
+import FavContext from "../../context/FavouriteContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 Modal.setAppElement("#root"); // Set the root element for the modal
+// toast.configure();
 
 function ProductsCard(props) {
   const [heartColor, setHeartColor] = useState("disabled");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantiy, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
+  const { addToFav } = useContext(FavContext);
+  const { removeFromFav } = useContext(FavContext);
 
-  function handleHeartClick() {
-    setHeartColor((prevColor) =>
-      prevColor === "disabled" ? "error" : "disabled"
+  const notify = () => {
+    // console.log("carttt");
+    toast.success("Added to cart!", {
+      position: "top-center",
+      autoClose:2000,
+      draggable:true
+    });
+  };
+
+  function handleHeartClick(event) {
+    setHeartColor(
+      (prevColor) => (prevColor === "disabled" ? "error" : "disabled")
+      // console.log(prevColor);
     );
+    handleAddToFav();
+    console.log(event);
+  }
+
+  function handleAddToFav() {
+    // console.log("AAAAAAAAA");
+    // console.log(heartColor);
+    if (heartColor === "disabled") {
+      addToFav(props.prod_id, props.name, props.price);
+    } else if (heartColor === "error") {
+      removeFromFav(props.prod_id);
+    }
   }
 
   function handleSubtract() {
@@ -38,6 +70,8 @@ function ProductsCard(props) {
   function closeModal() {
     setIsModalOpen(false);
   }
+
+  // const quantity = 0;
 
   return (
     <div className="product-card">
@@ -71,9 +105,7 @@ function ProductsCard(props) {
           <div className="modal-details">
             <p className="modal-product-name">{props.name}</p>
             <p className="modal-product-price">${props.price}</p>
-            <p className="modal-product-description">
-              {props.desc}
-            </p>
+            <p className="modal-product-description">{props.desc}</p>
             {/* Add more details like description, size dropdown, etc. */}
             <div className="modal-size-select">
               <div className="size-selector-dropdown">
@@ -102,9 +134,19 @@ function ProductsCard(props) {
               </button>
             </div>
             <div className="flex">
-              <button className="cart-btn">Add to Cart</button>
+              <button
+                className="cart-btn"
+                onClick={() => {
+                  notify();
+                  addToCart(props.imgUrl, props.name, quantiy, props.price);
+                }}
+              >
+                Add to Cart
+              </button>
+              <ToastContainer/>
               <button className="cart-btn">Buy Now</button>
             </div>
+
             <p className="article-number">article# {props.prod_id}</p>
           </div>
         </div>

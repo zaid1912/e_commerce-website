@@ -31,39 +31,48 @@ import KidsAll from "./components/kids/KidsAll";
 import WomenShoes from "./components/women/WomenShoes";
 import MenShoes from "./components/men/MenShoes";
 import KidsShoes from "./components/kids/KidsShoes";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import { CartProvider } from "./components/context/CartContext";
+import CartPage from "./components/cart/CartPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<MainPage />} />
-        <Route path="about" element={<About/>} />
-        <Route path="help" element={<HelpLayout/>}>
-          <Route path="faqs" element = {<Faqs />}/>
-          <Route path="contact" element = {<Contact />}/>
+      {/* <CartProvider> */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<MainPage />} />
+          <Route path="about" element={<About />} />
+          <Route path="help" element={<HelpLayout />}>
+            <Route path="faqs" element={<Faqs />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+          <Route path="women" element={<WomenPage />}>
+            <Route index element={<WomenAll />} />
+            <Route path="tops" element={<WomenTops />} />
+            <Route path="bottoms" element={<WomenBottoms />} />
+            <Route path="jackets" element={<WomenJackets />} />
+            <Route path="shoes" element={<WomenShoes />} />
+          </Route>
+          <Route path="men" element={<MenPage />}>
+            <Route index element={<MenAll />} />
+            <Route path="tops" element={<MenTops />} />
+            <Route path="bottoms" element={<MenBottoms />} />
+            <Route path="jackets" element={<MenJackets />} />
+            <Route path="shoes" element={<MenShoes />} />
+          </Route>
+          <Route path="kids" element={<KidsPage />}>
+            <Route index element={<KidsAll />} />
+            <Route path="tops" element={<KidsTops />} />
+            <Route path="bottoms" element={<KidsBottoms />} />
+            <Route path="jackets" element={<KidsJackets />} />
+            <Route path="shoes" element={<KidsShoes />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="cart" element={<CartPage/>}/>
         </Route>
-        <Route path="women" element={<WomenPage />}>
-          <Route index element= {<WomenAll/>} />
-          <Route path="tops" element={<WomenTops />} />
-          <Route path="bottoms" element={<WomenBottoms />} />
-          <Route path="jackets" element={<WomenJackets />} />
-          <Route path="shoes" element={<WomenShoes />} />
-        </Route>
-        <Route path="men" element={<MenPage />}>
-          <Route index element= {<MenAll/>}/>
-          <Route path="tops" element={<MenTops />} />
-          <Route path="bottoms" element={<MenBottoms />} />
-          <Route path="jackets" element={<MenJackets />} />
-          <Route path="shoes" element={<MenShoes />} />
-        </Route>
-        <Route path="kids" element={<KidsPage />}>
-          <Route index element= {<KidsAll/>}/>
-          <Route path="tops" element={<KidsTops />} />
-          <Route path="bottoms" element={<KidsBottoms />} />
-          <Route path="jackets" element={<KidsJackets />} />
-          <Route path="shoes" element={<KidsShoes />} />
-        </Route>
-      </Route>
+      {/* </CartProvider> */}
     </>
   )
 );
