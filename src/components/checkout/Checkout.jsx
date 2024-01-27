@@ -1,21 +1,23 @@
-import React, { useContext } from "react";
-import "./cart.css";
-import CartContext from "../context/CartContext";
-import CartCard from "./CartCard";
+import React, {useContext} from 'react'
+import './checkout.css';
+import '../cart/CartPage';
+
+import '../cart/cartCard.css';
+import '../cart/cart.css';
+import '../cart/CartCard';
+import { Context } from 'react';
+import CartContext from '../context/CartContext';
+import CartCard from '../cart/CartCard';
 import { NavLink } from 'react-router-dom';
 
-function CartPage(props) {
-  const { cartItems } = useContext(CartContext);
+function Checkout() {
 
-  const {removeFromCart} = useContext(CartContext);
-
-
-
-
-  // Define a custom style for the breadcrumb separator using ::before
   const breadcrumbStyle = {
     content: '">"', // Set the separator as >
   };
+
+  const { cartItems } = useContext(CartContext);
+
 
   function calculateSubTotal() {
     var subTotal = 0;
@@ -26,8 +28,6 @@ function CartPage(props) {
     return subTotal.toFixed(2);
   }
 
-
-
   return (
     <div className="cart-page">
       <nav aria-label="breadcrumb">
@@ -37,7 +37,7 @@ function CartPage(props) {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Cart
+            Checkout
           </li>
         </ol>
       </nav>
@@ -59,13 +59,12 @@ function CartPage(props) {
                 name={cartItem.name}
                 qty={cartItem.qty}
                 price={cartItem.price}
-                removeFromCart={removeFromCart}
               />
             ))}
           </tbody>
         </table>
         <div className="cart-totals">
-          <h5>CART TOTALS</h5>
+          <h5>CHECKOUT NOW</h5>
 
           <div className="subtotals">
             <p className="bold">Subtotal:</p>
@@ -73,10 +72,9 @@ function CartPage(props) {
           </div>
           <br />
           <div className="subtotals">
-            <p className="bold">Shipping:</p>
+            <p className="bold">Payment Method:</p>
             <p className="light-text">
-              No shipping method chosen. Please Login or Signup and proceed to checkout for shipping
-              methods.
+              Pay Online
             </p>
           </div>
 
@@ -86,7 +84,7 @@ function CartPage(props) {
           </div>
           <div className="checkout-btn">
             <NavLink to="/cart/register">
-              <button type="submit">Proceed To Checkout</button>
+              <button type="submit">Pay Now</button>
               {/* Checkout */}
             </NavLink>
           </div>
@@ -101,7 +99,7 @@ function CartPage(props) {
         `}
       </style>
     </div>
-  );
+  )
 }
 
-export default CartPage;
+export default Checkout

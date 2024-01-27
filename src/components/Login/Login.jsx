@@ -1,75 +1,97 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import './login.css';
 import axios from '../../axios';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  // const [email, setEmail] = useState('');
+  const passwordRef = useRef();
+  const errRef = useRef();
 
-    })
+  const [errMsg, setErrMsg] = useState('');
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        console.log(name);
-        console.log(value);
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-        console.log(formData);
-    };
-    async function handleSubmit(e) {
-      e.preventDefault();
-      try{
-        const response = await axios.post('/login', formData);
-        console.log('Data successfully submitted: ', response.data);
+  useEffect(() => {
+    console.log('Component re-rendered'); // Log when the component re-renders
+    emailRef.current.focus();
+  }, []); // Empty dependency array means this effect runs once, similar to componentDidMount
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [errMsg]);
+
+
+  // useEffect(() => {
+  //   console.log('email data rerender')
+  // }, [email]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // console.log(emailRef);
+    if (name === 'email') {
+      emailRef.current = value;
+    } else if (name === 'password') {
+      passwordRef.current = value;
+    }
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const response = await axios.post('login', { email: emailRef.current, password: passwordRef.current });
+      emailRef.current = ''; // Clearing the ref value
+      passwordRef.current = ''; // Clearing the ref value
+      errRef.current.style.display = 'none'; // Hide the error message
+      navigate('/checkout');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrMsg(error.response.data.error);
+        errRef.current.style.display = 'block'; // Show the error message
       }
-      catch(error){
-        console.error('Error submitting data', error);
+    }
+  }
 
-      }
-    } 
   return (
-    <div className="login-form ">
-      <form method="post" action="/login" onSubmit={handleSubmit}>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
+    <div className="login-form">
+      <section>
+        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+          {errMsg}
+        </p>
+      </section>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email address</label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
+            ref={emailRef}
             name="email"
-            id="exampleInputEmail1"
+            id="email"
             aria-describedby="emailHelp"
             placeholder="Enter email"
             onChange={handleChange}
-          ></input>
-          <small id="emailHelp" class="form-text text-muted">
+            // onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
           </small>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
-            class="form-control"
-            id="exampleInputPassword1"
+            className="form-control"
+            id="password"
             placeholder="Password"
             onChange={handleChange}
-          ></input>
+            ref={passwordRef}
+            required
+          />
         </div>
-        <div class="form-group form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="exampleCheck1"
-          ></input>
-          <label class="form-check-label" for="exampleCheck1">
-            Remember Me
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary">
+        <button className="btn btn-primary">
           Login
         </button>
       </form>

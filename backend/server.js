@@ -22,6 +22,7 @@ import flash from 'connect-flash';
   // })
   const app = express();
   const port = process.env.PORT || 8001;
+  app.use(cors());
   
   app.use(session({
     secret: 'your-secret-key',
@@ -33,7 +34,6 @@ import flash from 'connect-flash';
   app.use(flash());
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -42,44 +42,44 @@ app.use(bodyParser.json());
 
 // app.get('/', (req, res) => res.status(200).send('Hello'));
 
-passport.use(new LocalStrategy({ passReqToCallback: true },
-  async (req, email, password, done) => {
-    try {
-      const userQuery = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await pool.query(userQuery, [email]);
-      const user = rows[0];
+// passport.use(new LocalStrategy({ passReqToCallback: true },
+//   async (req, email, password, done) => {
+//     try {
+//       const userQuery = 'SELECT * FROM users WHERE email = $1';
+//       const { rows } = await pool.query(userQuery, [email]);
+//       const user = rows[0];
 
-      if (!user) {
-        return done(null, false, req.flash('loginMessage', 'No user found.'));
-      }
+//       if (!user) {
+//         return done(null, false, req.flash('loginMessage', 'No user found.'));
+//       }
 
-      const passwordMatch = await bcrypt.compare(password, user.password);
+//       const passwordMatch = await bcrypt.compare(password, user.password);
 
-      if (!passwordMatch) {
-        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-      }
+//       if (!passwordMatch) {
+//         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+//       }
 
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  }
-));
+//       return done(null, user);
+//     } catch (error) {
+//       return done(error);
+//     }
+//   }
+// ));
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const userQuery = 'SELECT * FROM users WHERE id = $1';
-    const { rows } = await pool.query(userQuery, [id]);
-    const user = rows[0];
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const userQuery = 'SELECT * FROM users WHERE id = $1';
+//     const { rows } = await pool.query(userQuery, [id]);
+//     const user = rows[0];
+//     done(null, user);
+//   } catch (error) {
+//     done(error);
+//   }
+// });
 
 app.get('/', async(req, res) => {
   try{
@@ -205,75 +205,71 @@ app.get('/kids/:id', async (req, res) => {
 
 
 
-app.post('/register', async(req, res) => {
-  try{
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const email = req.body.email;
-    const address = req.body.address;
-    const query = 'INSERT INTO users (email, password, address) VALUES ($1, $2, $3)';
-    const values = [email, hashedPassword, address];
-    pool.query(query, values);
-    console.log(email, passport, address);
-    res.status(200).json({ message: 'Registration successful.' });
-    // res.redirect('/login');
-  }
-  catch(error){
-    console.error('Error registering user:', error);
-    res.status(500).json({ error: 'An error occurred during registration.' });
-  }
-})
+
 
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
 
-  try {
+  try{
     const query = 'SELECT * FROM users WHERE email = $1';
-    const { rows } = await pool.query(query, [email]);
-
-    console.log(rows);
-
-    if (rows.length === 0) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    const {rows} = await pool.query(query, [email]); 
+    if(rows.length == 0){
+      return(res.status(401).json({message: 'Invalid Credentials'}))
     }
 
-    const user = rows[0];
+    const possibleUser = rows[0];
+    
+    const passwordCheck = await bcrypt.compare(possibleUser.password, password);
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    if(!passwordCheck){
+      return res.status(401).json({message: 'Invalid Credentials'});
+
     }
 
-    // You can generate and send a JWT token here if needed
-
-    // res.status(200).json({ message: 'Login successful' });
-    console.log('success');
-    res.redirect('/');
-  } catch (error) {
+    return res.status(200).json({message: 'Login Successful'});
+  }
+  catch(error){
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Server error' });
   }
+
+
 });
 
 
-// app.post('/login', (req, res, next) => {
-//   passport.authenticate('local', (err, user, info) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     if (!user) {
-//       return res.status(401).json({ message: req.flash('loginMessage') });
-//     }
-//     req.logIn(user, (loginErr) => {
-//       if (loginErr) {
-//         return next(loginErr);
-//       }
-//       return res.status(200).json({ message: 'Login successful' });
-//     });
-//   })(req, res, next);
-// });
+app.post('/register', async (req, res) => {
+  try {
+    const { email, password, address } = req.body;
 
+    const existingUser = await pool.query('SELECT * FROM users where email = $1', [email]);
+
+    if (existingUser.rows.length > 0) {
+      return res.status(400).json({ error: "Your account already exists. Please login" });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Save user to the database
+    const result = await pool.query(
+      'INSERT INTO users (email, password, address) VALUES ($1, $2, $3) RETURNING *',
+      [email, hashedPassword, address]
+    );
+
+    res.json({ user: result.rows[0] });
+  } catch (error) {
+    console.error('Error processing registration:', error);
+
+    if (error.constraint === 'users_email_key') {
+      // Handle unique constraint violation separately
+      return res.status(400).json({ error: "Email is already registered. Please use a different email" });
+    }
+
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 app.post('/trendythreads/User', (req, res) => {

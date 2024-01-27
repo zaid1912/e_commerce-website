@@ -22,4 +22,13 @@ td img{
     border: 1px solid rgb(218, 218, 218);
   }
 
+  .deleteIcon{
+    background-color: transparent;
+    border: none;
+  }
+  .deleteIcon:hover{
+    color: blue;
+    cursor: pointer;
+  }
+
   

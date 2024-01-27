@@ -7,7 +7,7 @@ const pool = new Pool({
     password: 'postgres',
     host: 'localhost',
     port: 5432,
-    database: 'treandy-threads',
+    database: 'trendy_threads',
 });
 
 export default pool;

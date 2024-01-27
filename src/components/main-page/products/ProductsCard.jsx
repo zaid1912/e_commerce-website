@@ -138,7 +138,7 @@ function ProductsCard(props) {
                 className="cart-btn"
                 onClick={() => {
                   notify();
-                  addToCart(props.imgUrl, props.name, quantiy, props.price);
+                  addToCart(props.prod_id, props.imgUrl, props.name, quantiy, props.price);
                 }}
               >
                 Add to Cart
